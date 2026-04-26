@@ -5,11 +5,9 @@ const noBtn = document.querySelector(".no-btn");
 
 let clickCount = 0;
 
-// This ensures the image resets properly every time
 function updateImage(name) {
-    // Force lowercase to match your GitHub file list
-    const fileName = name.toLowerCase();
-    gif.src = fileName;
+    // Adding ?v= plus a random number forces the browser to refresh the image
+    gif.src = name.toLowerCase() + "?v=" + Math.random();
 }
 
 function showSuccess() {
@@ -19,7 +17,14 @@ function showSuccess() {
     noBtn.style.display = "none";
 }
 
-yesBtn.addEventListener("click", showSuccess);
+yesBtn.addEventListener("click", () => {
+    if (clickCount >= 4) {
+        // If they click the moving "No" button (which is yesBtn)
+        showSuccess();
+    } else {
+        showSuccess();
+    }
+});
 
 noBtn.addEventListener("click", () => {
     clickCount++;
@@ -47,16 +52,15 @@ noBtn.addEventListener("click", () => {
         yesBtn.innerHTML = "No";
         noBtn.innerHTML = "Yes";
         
-        // This makes the "No" button move
+        yesBtn.style.position = "fixed";
         yesBtn.addEventListener("mouseover", () => {
             const x = Math.random() * (window.innerWidth - yesBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - yesBtn.offsetHeight);
-            yesBtn.style.position = "fixed"; 
             yesBtn.style.left = x + "px";
             yesBtn.style.top = y + "px";
         });
 
-        // The "Yes" button now triggers the end
+        // The "Yes" button (noBtn) now finishes the project
         noBtn.onclick = showSuccess;
     }
 });
