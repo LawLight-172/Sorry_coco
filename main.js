@@ -5,37 +5,15 @@ const noBtn = document.querySelector(".no-btn");
 
 let clickCount = 0;
 
-// Function to handle the final "Success" state
-function showSuccess() {
+// Function for when she finally says yes
+function handleYesClick() {
     question.innerHTML = "Hehehe!! I knew It";
     gif.src = "love.gif";
     yesBtn.style.display = "none";
     noBtn.style.display = "none";
 }
 
-// Function to make the button move (for the final stage)
-function moveButton() {
-    const margin = 50;
-    const maxX = window.innerWidth - yesBtn.offsetWidth - margin;
-    const maxY = window.innerHeight - yesBtn.offsetHeight - margin;
-
-    const randomX = Math.max(margin, Math.floor(Math.random() * maxX));
-    const randomY = Math.max(margin, Math.floor(Math.random() * maxY));
-
-    yesBtn.style.position = "fixed"; // Changed to fixed to ensure it moves on screen
-    yesBtn.style.left = randomX + "px";
-    yesBtn.style.top = randomY + "px";
-}
-
-yesBtn.addEventListener("click", () => {
-    // If the button is currently the "No" button (at clickCount 4)
-    if (clickCount >= 4) {
-        // Do nothing or let it move. If they manage to click it, they win!
-        showSuccess();
-    } else {
-        showSuccess();
-    }
-});
+yesBtn.addEventListener("click", handleYesClick);
 
 noBtn.addEventListener("click", () => {
     clickCount++;
@@ -43,9 +21,8 @@ noBtn.addEventListener("click", () => {
     if (clickCount === 1) {
         question.innerHTML = "I'm SORRY";
         gif.src = "sorry.png";
-        gif.style.width = "300px"; // Adjusting size as per your previous code
-        noBtn.innerHTML = "No";
         yesBtn.innerHTML = "Accha thik hai";
+        noBtn.innerHTML = "No";
     } 
     else if (clickCount === 2) {
         question.innerHTML = "Soch lo acche se!";
@@ -58,17 +35,24 @@ noBtn.addEventListener("click", () => {
         noBtn.innerHTML = "Final no";
         yesBtn.innerHTML = "Chalo maan gai";
     } 
-    else if (clickCount === 4) {
+    else if (clickCount >= 4) {
         question.innerHTML = "Manja nah! kitna bhav khayegi";
         gif.src = "run.gif";
-        yesBtn.innerHTML = "No"; // Swapping roles
+        
+        // Swapping button text to trick her
+        yesBtn.innerHTML = "No";
         noBtn.innerHTML = "Yes";
         
-        // Start the running away effect on the "No" button
-        yesBtn.addEventListener("mouseover", moveButton);
-    } 
-    else if (clickCount >= 5) {
-        // This is now the "Yes" button
-        showSuccess();
+        // Make the "No" button (which is now the yesBtn) move away
+        yesBtn.addEventListener("mouseover", () => {
+            const x = Math.random() * (window.innerWidth - yesBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - yesBtn.offsetHeight);
+            yesBtn.style.position = "absolute";
+            yesBtn.style.left = x + "px";
+            yesBtn.style.top = y + "px";
+        });
+        
+        // If she clicks the swapped "Yes" button (which is the noBtn)
+        noBtn.addEventListener("click", handleYesClick);
     }
 });
