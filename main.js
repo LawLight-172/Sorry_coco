@@ -13,8 +13,12 @@ function updateImage(name) {
 function showSuccess() {
     question.innerHTML = "Hehehe!! I knew It";
     updateImage("love.gif");
-    yesBtn.style.display = "none";
-    noBtn.style.display = "none";
+    // Removed the display = "none" lines so buttons stay
+    yesBtn.innerHTML = "Yay!";
+    noBtn.innerHTML = "Restart?";
+    
+    // Optional: Make the "Restart" button reload the page
+    noBtn.onclick = () => { location.reload(); };
 }
 
 yesBtn.addEventListener("click", () => {
