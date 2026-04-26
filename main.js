@@ -8,7 +8,7 @@ const btnGrp = document.querySelector(".btn-group");
 
 yesBtn.addEventListener("click", () => {
   question.innerHTML = "I'm SORRY";
-  gif.src = "images/sorry.png";
+  gif.src = "sorry.png";
   gif.style.height = "300px"; 
 gif.style.width = "400px"; 
   noBtn.innerHTML = "No";
@@ -16,46 +16,46 @@ gif.style.width = "400px";
 
   yesBtn.addEventListener("click", () => {
     question.innerHTML = "Hehehe!! I knew It";
-    gif.src = "images/love.gif";
+    gif.src = "love.gif";
     yesBtn.style.display = "none";
     noBtn.style.display = "none";
   })
 
   noBtn.addEventListener("click", () => {
     question.innerHTML = "Soch lo acche se!";
-    gif.src = "images/download.gif";
+    gif.src = "download.gif";
     yesBtn.innerHTML = "Accha thik hai";
     noBtn.innerHTML = "Nahi Sochna";
 
     yesBtn.addEventListener("click", () => {
       question.innerHTML = "Hehehe, I knew it!";
-      gif.src = "images/love.gif";
+      gif.src = "love.gif";
       yesBtn.style.display = "none";
       noBtn.style.display = "none";
     })
 
     noBtn.addEventListener("click", () => {
       question.innerHTML = "Ak baar ar soch lo";
-      gif.src = "images/sadlife.gif";
+      gif.src = "sadlife.gif";
       yesBtn.innerHTML = "Chalo maan gai";
       noBtn.innerHTML = "Final no";
 
       yesBtn.addEventListener("click", () => {
         question.innerHTML = "Hehehe, I knew it!";
-        gif.src = "images/love.gif";
+        gif.src = "love.gif";
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
       });
 
       noBtn.addEventListener("click", () => {
         question.innerHTML = "Manja nah! kitna bhav khayegi";
-        gif.src = "images/run.gif";
+        gif.src = "run.gif";
         yesBtn.innerHTML = "No";
         noBtn.innerHTML = "Yes";
 
         noBtn.addEventListener("click", () => {
           question.innerHTML = "Hehehe, I knew it!";
-          gif.src = "images/love.gif";
+          gif.src = "love.gif";
           yesBtn.style.display = "none";
           noBtn.style.display = "none";
         })
