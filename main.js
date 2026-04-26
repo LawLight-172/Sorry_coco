@@ -5,54 +5,58 @@ const noBtn = document.querySelector(".no-btn");
 
 let clickCount = 0;
 
-// Function for when she finally says yes
-function handleYesClick() {
+// This ensures the image resets properly every time
+function updateImage(name) {
+    // Force lowercase to match your GitHub file list
+    const fileName = name.toLowerCase();
+    gif.src = fileName;
+}
+
+function showSuccess() {
     question.innerHTML = "Hehehe!! I knew It";
-    gif.src = "love.gif";
+    updateImage("love.gif");
     yesBtn.style.display = "none";
     noBtn.style.display = "none";
 }
 
-yesBtn.addEventListener("click", handleYesClick);
+yesBtn.addEventListener("click", showSuccess);
 
 noBtn.addEventListener("click", () => {
     clickCount++;
 
     if (clickCount === 1) {
         question.innerHTML = "I'm SORRY";
-        gif.src = "sorry.png";
-        yesBtn.innerHTML = "Accha thik hai";
+        updateImage("sorry.png"); 
         noBtn.innerHTML = "No";
+        yesBtn.innerHTML = "Accha thik hai";
     } 
     else if (clickCount === 2) {
         question.innerHTML = "Soch lo acche se!";
-        gif.src = "download.gif";
+        updateImage("download.gif");
         noBtn.innerHTML = "Nahi Sochna";
     } 
     else if (clickCount === 3) {
         question.innerHTML = "Ak baar aur soch lo";
-        gif.src = "sadlife.gif";
+        updateImage("sadlife.gif");
         noBtn.innerHTML = "Final no";
-        yesBtn.innerHTML = "Chalo maan gai";
     } 
     else if (clickCount >= 4) {
         question.innerHTML = "Manja nah! kitna bhav khayegi";
-        gif.src = "run.gif";
+        updateImage("run.gif");
         
-        // Swapping button text to trick her
         yesBtn.innerHTML = "No";
         noBtn.innerHTML = "Yes";
         
-        // Make the "No" button (which is now the yesBtn) move away
+        // This makes the "No" button move
         yesBtn.addEventListener("mouseover", () => {
             const x = Math.random() * (window.innerWidth - yesBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - yesBtn.offsetHeight);
-            yesBtn.style.position = "absolute";
+            yesBtn.style.position = "fixed"; 
             yesBtn.style.left = x + "px";
             yesBtn.style.top = y + "px";
         });
-        
-        // If she clicks the swapped "Yes" button (which is the noBtn)
-        noBtn.addEventListener("click", handleYesClick);
+
+        // The "Yes" button now triggers the end
+        noBtn.onclick = showSuccess;
     }
 });
